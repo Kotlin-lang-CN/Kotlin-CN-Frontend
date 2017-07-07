@@ -1,0 +1,15 @@
+.DS_Store
+.gradle
+build
+*.iml
+*.ipr
+*.iws
+*.ids
+.idea
+local.properties
+out
+!build.release
+node_modules
+/log
+default.etcd
+/env

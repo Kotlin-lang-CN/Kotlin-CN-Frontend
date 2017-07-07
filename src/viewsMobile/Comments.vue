@@ -4,7 +4,7 @@
       <header>共收到{{ reply.length }}条评论</header>
       <ul>
         <li v-for="value in reply">
-          <app-avatar :logo="value.user.logo" :username="value.user.username" :size="'middle'">
+          <app-avatar :user.sync="value.user" :size="'middle'">
           </app-avatar>
           <div class="cont">
             <div>

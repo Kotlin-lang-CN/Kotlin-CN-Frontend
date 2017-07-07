@@ -8,7 +8,6 @@
         <h2>{{user.username}} <a :href="'mailto:'+user.email"><i class="email"></i></a></h2>
       </section>
       <section>
-
       </section>
     </div>
   </div>
@@ -16,6 +15,7 @@
 
 <script>
   import Event from '../assets/js/Event'
+  import md5 from 'md5'  
 
   export default {
     data() {
@@ -27,6 +27,9 @@
     created() {
       Event.on('name-card', (user) => {
         this.user = user;
+        if (this.user.logo === '') {
+            this.user.logo = 'https://s.gravatar.com/avatar/' + md5(this.user.email)
+        }
         this.show = true;
       })
     },

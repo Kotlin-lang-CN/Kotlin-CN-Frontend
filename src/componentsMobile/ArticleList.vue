@@ -22,7 +22,6 @@
   import Config from "../assets/js/Config.js";
   import Net from "../assets/js/Net.js";
   import Event from "../assets/js/Event.js";
-  import LoginMgr from '../assets/js/LoginMgr.js';
   import Avatar from "../components/Avatar.vue";
   export default {
     components: {
@@ -30,17 +29,10 @@
     },
     data() {
       return {
-        me: LoginMgr,
         loading: false,
         articles: [],
         offset: 0,
         hasMore: false,
-        options: [
-          {text: '正常', value: 0},
-          {text: '冻结', value: 1},
-          {text: '删除', value: 2},
-          {text: '精品', value: 3}
-        ],
         categories: []
       }
     },

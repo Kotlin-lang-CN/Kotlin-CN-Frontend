@@ -10,6 +10,9 @@ const LoginMgr = {
     let token = Cookie.get("X-App-Token");
     let role = Cookie.get('X-App-Role');
     let logo = Cookie.get('X-App-Logo');
+    if (!logo || logo.length === 0) {
+      logo = 'https://s.gravatar.com/avatar/';
+    }
     if (uid && uid.length > 0
         && username && username.length > 0
         && email && email.length > 0
@@ -19,9 +22,9 @@ const LoginMgr = {
       this.email = email;
       this.token = token;
       this.role = role;
-      this.logo = logo;
       this.isLogin = true;
       this.isAdminRole = this.role === '1';
+      this.logo = logo;
       return this
     } else {
       this.uid = undefined;

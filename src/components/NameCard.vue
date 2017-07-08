@@ -6,7 +6,8 @@
         <section>
           <img class="logo" v-bind:src="user.logo"
                style="width:150px;height:150px;" width="150" height="150"/>
-          <h2>{{user.username}} <a :href="'mailto:'+user.email"><i class="email"></i></a></h2>
+          <h2>{{user.username}} <a :href="'mailto:'+user.email"><i
+                  class="email"></i></a></h2>
         </section>
         <section class="active-info">
           <a v-if="me.info().uid === user.uid" :href="userUrl + '/' + user.uid">
@@ -42,7 +43,7 @@
       Event.on('name-card', (user) => {
         this.user = user;
         if (this.user.logo === '') {
-          this.user.logo = 'https://s.gravatar.com/avatar/' + md5(this.user.email)
+          this.user.logo = 'https://s.gravatar.com/avatar/' //+ md5(this.user.email)
         }
         this.show = true;
         this.async();

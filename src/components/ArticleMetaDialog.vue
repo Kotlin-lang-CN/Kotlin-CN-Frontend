@@ -38,7 +38,6 @@
     },
     created(){
       Event.on('edit-meta', (args) => {
-        window.console.log(args);
         this.dialog.meta = args.meta;
         this.dialog.confirm = args.confirm;
         this.tag = [];

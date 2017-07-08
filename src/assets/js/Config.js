@@ -6,7 +6,8 @@ const CGI = {
   reply: 'https://debug.kotlin-cn.org/api/reply',
   rss: 'https://debug.kotlin-cn.org/api/rss',
   flower: 'https://debug.kotlin-cn.org/api/flower',
-  misc: 'https://debug.kotlin-cn.org/api/misc'
+  misc: 'https://debug.kotlin-cn.org/api/misc',
+  creator: 'https://debug.kotlin-cn.org/api/creator'
 };
 
 const Config = {
@@ -62,6 +63,12 @@ const Config = {
     misc: {
       dashboard: CGI.misc + '/dashboard',//网站公告栏
       homeLink: CGI.misc + '/home/link'//首页广告栏链接
+    },
+    creator: {
+      article_count: CGI.creator + '/article/count',
+      reply_count: CGI.creator + '/reply/count',
+      article: CGI.creator + '/article',
+      reply: CGI.creator + '/reply'
     }
   },
   OAuth: {
@@ -77,7 +84,8 @@ const Config = {
     edit: '/edit',
     post: '/post',
     comments: '/comments',
-    wiki: '/wiki'
+    topic: '/topic',
+    user: '/user'
   },
   Topic: {
     select: [

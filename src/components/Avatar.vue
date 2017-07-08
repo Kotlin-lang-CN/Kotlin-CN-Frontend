@@ -26,7 +26,6 @@
       size: ''
     },
     mounted() {
-      console.log(this.user);
       if (this.user.logo === '' && this.user.email !== '') {
         this.logo = 'https://s.gravatar.com/avatar/' + md5(this.user.email)
       } else {

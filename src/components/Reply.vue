@@ -85,7 +85,6 @@
                 this.getReply(0);
             },
             getReplyCount(){
-                console.log(this.articleId);
                 Net.get({
                     url: Config.URL.reply.count,
                     condition: {

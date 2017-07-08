@@ -6,6 +6,7 @@ export default {
   '/topic': './views/Topic',
   '/topic/:key': './views/Topic',
   '/topic/:key/:id': './views/Topic',
+  '/user/:id':'./views/User',
 
   '/m/': './viewsMobile/Home',
   '/m/post/:id': './viewsMobile/Post',
@@ -15,5 +16,6 @@ export default {
   '/comments/:id': './viewsMobile/Comments',
   '/m/topic': './views/404',
   '/m/topic/:key': './views/404',
-  '/m/topic/:key/:id': './views/404'
+  '/m/topic/:key/:id': './views/404',
+  '/m/user/:id':'./views/User'
 }

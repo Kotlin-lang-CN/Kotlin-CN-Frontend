@@ -30,7 +30,7 @@
 <style scoped lang="less">
   .tab-root {
     width: 1120px;
-    height: 134px;
+    height: 114px;
     margin-bottom: 20px;
     position: relative;
 
@@ -55,7 +55,7 @@
           display: block;
         }
         .logo {
-          height: 100px;
+          height: 80px;
           line-height: 100px;
           i {
             color: #55a532;
@@ -78,7 +78,7 @@
         }
       }
       li:nth-last-child(1) {
-        margin-right: 0%;
+        margin-right: 0;
       }
       li:hover {
         background-color: #e5e5e5;

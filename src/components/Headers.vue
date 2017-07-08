@@ -58,7 +58,7 @@
 
   function getParam(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
-            .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
   }
 
   export default {
@@ -92,7 +92,7 @@
         this.handleGithubAuth(code, state)
       }
       const url = window.location.href,
-          idx = url.indexOf(Config.UI.wiki);
+        idx = url.indexOf(Config.UI.wiki);
       this.current = idx > 0 ? 'wiki' : 'home';
     },
     methods: {
@@ -104,10 +104,10 @@
           url: Config.URL.github.createState
         }, (resp) => {
           window.location.href = 'http://github.com/login/oauth/authorize' +
-              '?state=' + resp.state +
-              '&client_id=' + Config.OAuth.github.clientId +
-              '&redirect_url=' + window.location.host +
-              '&scope=' + Config.OAuth.github.scope
+            '?state=' + resp.state +
+            '&client_id=' + Config.OAuth.github.clientId +
+            '&redirect_url=' + window.location.host +
+            '&scope=' + Config.OAuth.github.scope
         })
       },
       handleGithubAuth(code, state) {
@@ -121,16 +121,11 @@
           window.console.log(resp);
           if (resp.need_create_account) {
             Cookie.set('X-App-Github', resp.github_token);
+            Cookie.set('X-App-Github-User', resp);
             this.isLoading = false;
             LoginMgr.require(/*login already*/ () => window.location.href = '/', "request_register")
           } else {
-            LoginMgr.login({
-              username: resp.username,
-              email: resp.email,
-              uid: resp.uid,
-              token: resp.token,
-              role: resp.role,
-            });
+            LoginMgr.login(resp);
             window.location.href = '/'
           }
         }, () => window.location.href = '/');

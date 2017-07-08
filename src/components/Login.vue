@@ -125,13 +125,15 @@
       },
       login() {
         if (this.error) return;
-        let githubToken = Cookie.get('X-App-Github');
+        const githubToken = Cookie.get('X-App-Github');
+        const githubUserInfo = Cookie.get('X-App-Github-User');
         Net.post({
           url: Config.URL.account.login,
           condition: githubToken ? {
             'login_name': this.nameInput.trim(),
             'password': this.passwordInput,
             "github_token": githubToken,
+            'logo': JSON.parse(githubUserInfo).github_avatar
           } : {
             'login_name': this.nameInput.trim(),
             'password': this.passwordInput,
@@ -143,7 +145,8 @@
       },
       register() {
         if (this.error) return;
-        let githubToken = Cookie.get('X-App-Github');
+        const githubToken = Cookie.get('X-App-Github');
+        const githubUserInfo = Cookie.get('X-App-Github-User');
         let name = this.nameInput;
         let email = this.emailInput;
         Net.post({
@@ -152,7 +155,8 @@
             "username": this.nameInput,
             "password": this.passwordInput,
             "email": this.emailInput,
-            "github_token": githubToken
+            "github_token": githubToken,
+            'logo': JSON.parse(githubUserInfo).github_avatar
           } : {
             "username": this.nameInput,
             "password": this.passwordInput,
@@ -173,6 +177,7 @@
       },
       hide() {
         Cookie.remove('X-App-Github');
+        Cookie.remove('X-App-Github-User');
         if (this.showMode === 3 || this.showMode === 4) {
           setTimeout(() => window.location.href = '/', 300)
         }

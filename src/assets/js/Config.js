@@ -89,12 +89,12 @@ const Config = {
   },
   Topic: {
     select: [
-      'p3', 'p4', 'p5', 'p6'
+      'p1', 'p2', 'p3', 'p4'
     ],
-    def: "p3",
+    def: "p1",
     data: {
       p1: {
-        title: '专题一号',
+        title: '【视频】Kotlin 入门到进阶',
         link: '/topic/p1/',
         logo: 'fa fa-puzzle-piece',
         color: '#ea4335',
@@ -102,7 +102,7 @@ const Config = {
         readme: '6284762828886261760'
       },
       p2: {
-        title: '专题二号',
+        title: 'Kotlin in Chinese',
         link: '/topic/p2/',
         logo: 'fa fa-send',
         color: '#4285f4',
@@ -110,36 +110,20 @@ const Config = {
         readme: '6284215952900517888'
       },
       p3: {
-        title: '专题三号',
-        link: '/topic/p3/',
+        title: '社区博客',
+        link: '//www.kotliner.com',
         logo: 'fa fa-comments-o',
         color: '#fbbc05',
         toc: '6287247888258359296',
         readme: '6284762828886261760'
       },
       p4: {
-        title: '专题四号',
-        link: '/topic/p4/',
+        title: '中文站',
+        link: '//kotlincn.net',
         logo: 'fa fa-support',
         color: '#4285f4',
         toc: '6289370960008368128',
         readme: '6284215952900517888'
-      },
-      p5: {
-        title: '专题五号',
-        link: 'http://www.kotliner.cn',
-        logo: 'fa fa-users',
-        color: '#34a853',
-        toc: '',
-        readme: ''
-      },
-      p6: {
-        title: '专题六号',
-        link: 'http://www.kotlincn.net',
-        logo: 'fa fa-diamond',
-        color: '#ea4335',
-        toc: '',
-        readme: ''
       }
     }
   }

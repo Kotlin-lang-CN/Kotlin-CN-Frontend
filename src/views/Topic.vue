@@ -34,6 +34,8 @@
     },
     data () {
       return {
+        key: this.$root.params.key,
+        toc_id: null,
         id: this.$root.params.id,
         toc: {
           article: {title: ''},
@@ -52,10 +54,12 @@
     created(){
       this.init();
       Event.on('route-update', () => {
-        const newId = this.$root.params.id ? this.$root.params.id : Config.Wiki.readme;
-        if (this.id !== newId) {
+        const newkey = this.$root.params.key ? this.$root.params.key : Config.Topic.def;
+        const newId = this.$root.params.id ? this.$root.params.id : Config.Topic.data[newkey].readme;
+        if (this.id !== newId || this.key !== newkey) {
+          this.key = newkey;
           this.id = newId;
-          if (this.id) this.init()
+          this.init();
         }
       })
     },
@@ -68,14 +72,15 @@
         });
       },
       asyncToc(){
-        Net.get({url: Config.URL.article.detail.format(Config.Wiki.toc)}, (resp) => {
+        this.ensureConfig();
+        Net.get({url: Config.URL.article.detail.format(this.toc_id)}, (resp) => {
           this.toc = resp;
         }, (resp) => {
           if (resp.code === 34) window.location.href = "/404"
         });
       },
       asyncContent(){
-        if (!this.id) this.id = Config.Wiki.readme;
+        this.ensureConfig();
         Net.get({url: Config.URL.article.detail.format(this.id)}, (resp) => {//文章信息
           this.article = resp;
           const metaTitle = '【Kotlin-CN】' + resp.article.title + ' by ' + resp.author.username;
@@ -98,6 +103,11 @@
           const pos = posNormal ? posNormal : posDecode;
           $('#wiki-content').animate({scrollTop: pos ? pos.top : 0}, 'fast');
         }
+      },
+      ensureConfig(){
+        if (!this.key) this.key = Config.Topic.def;
+        if (!this.id) this.id = Config.Topic.data[this.key].readme;
+        if (!this.toc_id) this.toc_id = Config.Topic.data[this.key].toc;
       }
     },
     computed: {

@@ -11,9 +11,9 @@ const LoginMgr = {
     let role = Cookie.get('X-App-Role');
     let logo = Cookie.get('X-App-Logo');
     if (uid && uid.length > 0
-      && username && username.length > 0
-      && email && email.length > 0
-      && token && token.length > 0) {
+        && username && username.length > 0
+        && email && email.length > 0
+        && token && token.length > 0) {
       this.uid = uid;
       this.username = username;
       this.email = email;

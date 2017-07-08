@@ -159,12 +159,14 @@
             "email": this.emailInput,
           }
         }, (resp) => {
+          console.log(resp.logo);
           LoginMgr.login({
             uid: resp.uid,
             token: resp.token,
             username: name,
             email: email,
             role: 0,
+            logo: resp.logo
           });
           this.hide()
         })

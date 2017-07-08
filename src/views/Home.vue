@@ -2,6 +2,7 @@
   <app-layout>
     <div class="home-root">
       <home-link-title></home-link-title>
+      <topic-bar></topic-bar>
       <div class="content">
         <div class="post">
           <div class="sub-nav">
@@ -27,8 +28,9 @@
 
 <script>
   import HomeLinkTitle from '../components/HomeLinkTitle.vue';
-  import Config from "../assets/js/Config.js";
-  import Net from "../assets/js/Net.js";
+  import TopicBar from '../components/TopicBar.vue';
+  import Config from '../assets/js/Config.js';
+  import Net from '../assets/js/Net.js';
   import ArticleList from '../components/ArticleList.vue';
   import SideBar from '../components/SideBar.vue';
   import LoginMgr from '../assets/js/LoginMgr';
@@ -42,6 +44,7 @@
       'app-layout': AppLayout,
       'article-list': ArticleList,
       'side-bar': SideBar,
+      'topic-bar': TopicBar
     },
     data() {
       return {

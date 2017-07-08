@@ -31,7 +31,7 @@
           </div>
           <div class="btn">
             <span>
-              <app-avatar :user="me" :size="'middle'" class="user-logo"></app-avatar>
+              <app-avatar :user.sync="me" :size="'middle'" class="user-logo"></app-avatar>
               <i class="choice-icon"></i>
             </span>
             <div class="sub-menu">

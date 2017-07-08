@@ -3,7 +3,7 @@
     'middle' : avatarSize==='middle',
     'small' : avatarSize === 'small',
     'big' : avatarSize === 'big'
-    }"></img>
+    }"/>
 </template>
 <script>
   import md5 from 'md5'
@@ -13,7 +13,6 @@
       return {
         colors: ["#bdc0c5", "#c5d3e8", "#93a7c8", "#9baebe"],
         avatarSize: 'big',
-        logo: '',
         color: ''
       }
     },
@@ -26,15 +25,20 @@
       size: ''
     },
     mounted() {
-      if (this.user.logo === '' && this.user.email !== '') {
-        this.logo = 'https://s.gravatar.com/avatar/' + md5(this.user.email)
-      } else {
-        this.logo = this.user.logo
-      }
       if (this.size === 'small' || this.size === 'middle') {
         this.avatarSize = this.size;
       }
     },
+    computed: {
+      logo() {
+        window.console.log(this.user);
+        if (this.user.logo === '' && this.user.email !== '') {
+          return 'https://s.gravatar.com/avatar/' + md5(this.user.email)
+        } else {
+          return this.user.logo
+        }
+      }
+    }
   }
 </script>
 <style scoped>

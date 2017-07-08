@@ -111,7 +111,7 @@ const Config = {
       },
       p3: {
         title: '社区博客',
-        link: '//www.kotliner.com',
+        link: '//www.kotliner.cn',
         logo: 'fa fa-comments-o',
         color: '#fbbc05',
         toc: '6287247888258359296',

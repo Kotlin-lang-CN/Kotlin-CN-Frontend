@@ -3,10 +3,11 @@
     <div class="cont">
       <div class="title">
         <span class="logo">Kotlin China</span>
-        <span class="hint">使用 PC 登录, 体验完整功能</span>
       </div>
       <ul>
-        <li><a href="http://www.kotliner.cn/">博客</a></li>
+        <li><span class="hint">使用 PC 登录, 体验完整功能</span></li>
+        <li><a href="https://www.kotliner.cn/">博客</a></li>
+        <li><a href="https://www.kotlincn.net/docs/reference/">Wiki</a></li>
         <li><a href="https://www.kotlincn.net/">中文站</a></li>
       </ul>
     </div>
@@ -28,16 +29,10 @@
         margin-left: 12px;
       }
 
-      .hint {
-        font-size: .20rem;
-        color: #999;
-        display: block;
-        margin-left: 12px;
-      }
     }
     ul {
       position: absolute;
-      top: 100px;
+      top: 80px;
       left: 0;
       right: 0;
       list-style-type: none;
@@ -53,6 +48,14 @@
       a.sel {
         border-left: 8px #2b75e1 solid;
         background-color: #2b3444;
+      }
+
+      .hint {
+        font-size: .20rem;
+        color: #999;
+        display: block;
+        margin-left: 28px;
+        margin-bottom: 10px;
       }
     }
   }

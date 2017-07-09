@@ -8,7 +8,8 @@
                                   v-bind:class="{'sel':current === 'wiki'}">Wiki</a></div>
         <div class="menu-main"><a href="//www.kotliner.cn" title="博客">博客</a></div>
         <div class="menu-main"><a href="//www.kotlincn.net" title="中文站">中文站</a></div>
-        <div class="menu-user menu-right" v-if="!me.isLogin">
+
+        <section class="menu-user menu-right" v-if="!me.isLogin">
           <div class="btn">
             <span><button v-on:click="register">注册</button></span>
           </div>
@@ -23,8 +24,9 @@
               </li>
             </ul>
           </div>
-        </div>
-        <div class="menu-user menu-right" v-if="me.isLogin">
+        </section>
+
+        <section class="menu-user menu-right" v-if="me.isLogin">
           <div class="btn">
             <span><i class="add-icon"></i></span>
             <div class="sub-menu"><a :href="urlEdit">发布新话题</a></div>
@@ -34,11 +36,17 @@
               <app-avatar :user.sync="me" :size="'middle'" class="user-logo"></app-avatar>
               <i class="choice-icon"></i>
             </span>
-            <div class="sub-menu">
-              <button v-on:click="logout">退出登录</button>
-            </div>
+            <ul>
+              <li>
+                <button v-on:click="userHome">我的主页</button>
+              </li>
+              <li>
+                <button v-on:click="logout">退出登录</button>
+              </li>
+            </ul>
           </div>
-        </div>
+        </section>
+
       </div>
     </div>
     <div v-if="isLoading" class="github-auth-loading">
@@ -58,7 +66,7 @@
 
   function getParam(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
-        .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+            .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
   }
 
   export default {
@@ -92,7 +100,7 @@
         this.handleGithubAuth(code, state)
       }
       const url = window.location.href,
-        idx = url.indexOf(Config.UI.wiki);
+          idx = url.indexOf(Config.UI.wiki);
       this.current = idx > 0 ? 'wiki' : 'home';
     },
     methods: {
@@ -104,10 +112,10 @@
           url: Config.URL.github.createState
         }, (resp) => {
           window.location.href = 'http://github.com/login/oauth/authorize' +
-            '?state=' + resp.state +
-            '&client_id=' + Config.OAuth.github.clientId +
-            '&redirect_url=' + window.location.host +
-            '&scope=' + Config.OAuth.github.scope
+              '?state=' + resp.state +
+              '&client_id=' + Config.OAuth.github.clientId +
+              '&redirect_url=' + window.location.host +
+              '&scope=' + Config.OAuth.github.scope
         })
       },
       handleGithubAuth(code, state) {
@@ -129,6 +137,9 @@
             window.location.href = '/'
           }
         }, () => window.location.href = '/');
+      },
+      userHome(){
+        window.location.href = Config.UI.user + '/' + LoginMgr.info().uid;
       },
       register() {
         Event.emit('request_register')
@@ -281,6 +292,12 @@
             height: 124px;
             display: block;
             box-shadow: 0 0 10px #ccc;
+            li {
+              border-top: 1px #f1f1f1 solid;
+            }
+            li:nth-child(1) {
+              border-top: 0;
+            }
             button {
               color: #333;
               line-height: 62px;

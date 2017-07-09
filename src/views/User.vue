@@ -22,6 +22,7 @@
   import UserBaseInfo from '../components/UserBaseInfo.vue';
 
   import LoginMgr from '../assets/js/LoginMgr.js';
+  import Event from '../assets/js/Event.js';
   import Config from '../assets/js/Config.js';
   import Net from '../assets/js/Net.js';
   import md5 from 'md5'
@@ -46,13 +47,14 @@
       }
     },
     created(){
-      if (this.me.info().uid !== this.uid) {
+      if (LoginMgr.info().uid !== this.uid) {
         window.location.href = "/404";
       }
-    },
-    methods: {}
+      Event.on('login', (isLogin) => {
+        if (!isLogin) window.location.href = "/";
+      });
+    }
   }
-
 </script>
 
 <style scoped lang="less">
@@ -88,7 +90,7 @@
         color: #333;
       }
     }
-    .notify{
+    .notify {
       padding-top: 20px;
       line-height: 60px;
       border-top: 1px #f1f1f1 solid;

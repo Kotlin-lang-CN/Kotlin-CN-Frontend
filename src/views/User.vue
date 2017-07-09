@@ -7,9 +7,9 @@
         <li :class="{'select': navigation===nav_reply }" v-on:click="navigation=nav_reply">最近回复</li>
         <li :class="{'select': navigation===nav_notify }" v-on:click="navigation=nav_notify">新消息提醒</li>
       </ul>
-      <user-article :requestUrl="articleListUrl" v-if="navigation===nav_article"></user-article>
-      <user-reply :requestUrl="replyListUrl" v-if="navigation===nav_reply"></user-reply>
-      <div v-if="navigation===nav_notify" class="notify">没有新消息提醒</div>
+      <user-article :requestUrl="articleListUrl" :class="{'hide':navigation!==nav_article}"></user-article>
+      <user-reply :requestUrl="replyListUrl" :class="{'hide':navigation!==nav_reply}"></user-reply>
+      <div :class="{'hide':navigation!==nav_notify}" class="notify">没有新消息提醒</div>
     </div>
   </app-layout>
 </template>
@@ -89,6 +89,9 @@
       li:hover {
         color: #333;
       }
+    }
+    .hide {
+      display: none;
     }
     .notify {
       padding-top: 20px;

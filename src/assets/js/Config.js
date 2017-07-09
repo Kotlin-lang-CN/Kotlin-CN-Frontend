@@ -1,13 +1,13 @@
 const CGI = {
-  account: "/api/account",
-  github: '/api/github',
-  admin: '/api/admin',
-  article: "/api/article",
-  reply: '/api/reply',
-  rss: '/api/rss',
-  flower: '/api/flower',
-  misc: '/api/misc',
-  creator: '/api/creator'
+  account: "https://debug.kotlin-cn.org/api/account",
+  github: 'https://debug.kotlin-cn.org/api/github',
+  admin: 'https://debug.kotlin-cn.org/api/admin',
+  article: "https://debug.kotlin-cn.org/api/article",
+  reply: 'https://debug.kotlin-cn.org/api/reply',
+  rss: 'https://debug.kotlin-cn.org/api/rss',
+  flower: 'https://debug.kotlin-cn.org/api/flower',
+  misc: 'https://debug.kotlin-cn.org/api/misc',
+  creator: 'https://debug.kotlin-cn.org/api/creator'
 };
 
 const Config = {

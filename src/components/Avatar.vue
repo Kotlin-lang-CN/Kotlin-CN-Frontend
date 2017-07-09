@@ -31,7 +31,6 @@
     },
     computed: {
       logo() {
-        window.console.log(this.user);
         if (this.user.logo === '' && this.user.email !== '') {
           return 'https://s.gravatar.com/avatar/' + md5(this.user.email)
         } else {

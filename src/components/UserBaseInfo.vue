@@ -1,12 +1,16 @@
 <template>
   <div class="base-info">
     <div>
-      <img class="logo" :src="me.info().logo"
+      <img class="logo" :src="logo"
            style="width:150px;height:150px;" width="150" height="150"/>
       <h2>{{ me.info().username }} <a :href="'mailto:'+ me.info().email "><i class="email"></i></a></h2>
       <div>文章数{{articleCount}},回帖数{{replyCount}}</div>
     </div>
     <div>
+      <div class="edit">
+        <i class="fa fa-edit" v-if="!editMode" v-on:click="toggleEdit"><span>编辑</span></i>
+        <i class="fa fa-check-square-o" v-if="editMode" v-on:click="doneEdit"><span>确认</span></i>
+      </div>
       <table>
         <tr>
           <th>邮箱</th>
@@ -47,8 +51,6 @@
           <td v-if="editMode"><input title="description" v-model="edit.description"/></td>
         </tr>
       </table>
-      <i class="fa fa-edit" v-if="!editMode" v-on:click="toggleEdit"></i>
-      <i class="fa fa-check-square-o" v-if="editMode" v-on:click="doneEdit"></i>
     </div>
   </div>
 </template>
@@ -120,12 +122,12 @@
       },
       doneEdit(){
         if (this.edit.blog !== this.profile.blog
-            || this.edit.blog !== this.profile.blog
-            || this.edit.company !== this.profile.company
-            || this.edit.description !== this.profile.description
-            || this.edit.education !== this.profile.education
-            || this.edit.github !== this.profile.github
-            || this.edit.location !== this.profile.location) {
+          || this.edit.blog !== this.profile.blog
+          || this.edit.company !== this.profile.company
+          || this.edit.description !== this.profile.description
+          || this.edit.education !== this.profile.education
+          || this.edit.github !== this.profile.github
+          || this.edit.location !== this.profile.location) {
 
           window.layer.load();
           Net.post({
@@ -151,6 +153,15 @@
         }
         return copy;
       }
+    },
+    computed: {
+      logo() {
+        if (LoginMgr.logo || LoginMgr.logo === '' && LoginMgr.email !== '') {
+          return 'https://s.gravatar.com/avatar/' + md5(LoginMgr.email)
+        } else {
+          return LoginMgr.logo
+        }
+      }
     }
   }
 </script>
@@ -160,16 +171,23 @@
     border: 1px #f1f1f1 solid;
     padding: 20px;
     display: flex;
+
+    .edit {
+      float: right;
+      cursor: pointer;
+      margin-right: 10%;
+    }
+
     > div:nth-child(1) {
       width: 30%;
     }
     > div:nth-child(2) {
       text-align: left;
       width: 70%;
-      th{
-        width: 15%;
+      th {
+        width: 30%;
       }
-      td{
+      td {
         word-break: break-all;
       }
     }

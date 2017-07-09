@@ -5,7 +5,7 @@ mode=$1
 if [ 'release' = ${mode} ]; then
 
   cp src/assets/js/Config.js /tmp/Config.js
-  cp ../env/Config.js src/assets/js/Config.js
+  cp ./env/Config.js src/assets/js/Config.js
   cnpm install && npm run build
   cp /tmp/Config.js src/assets/js/Config.js
 

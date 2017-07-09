@@ -4,10 +4,9 @@
     <div class="dialog-content">
       <div class="content">
         <section>
-          <img class="logo" v-bind:src="user.logo"
-               style="width:150px;height:150px;" width="150" height="150"/>
+          <img class="logo" v-bind:src="logo" style="width:150px;height:150px;" width="150" height="150"/>
           <h2>{{user.username}} <a :href="'mailto:'+user.email"><i
-                  class="email"></i></a></h2>
+            class="email"></i></a></h2>
         </section>
         <section class="active-info">
           <a v-if="me.info().uid === user.uid" :href="userUrl + '/' + user.uid">
@@ -42,9 +41,6 @@
     created() {
       Event.on('name-card', (user) => {
         this.user = user;
-        if (this.user.logo === '') {
-          this.user.logo = 'https://s.gravatar.com/avatar/' //+ md5(this.user.email)
-        }
         this.show = true;
         this.async();
       })
@@ -66,6 +62,15 @@
         }, (resp) => {
           this.replyCount = resp.result[this.user.uid];
         })
+      }
+    },
+    computed: {
+      logo() {
+        if (this.user.logo === '' && this.user.email !== '') {
+          return 'https://s.gravatar.com/avatar/' + md5(this.user.email)
+        } else {
+          return this.user.logo
+        }
       }
     }
   }

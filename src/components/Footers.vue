@@ -6,6 +6,16 @@
       <a target="_blank" v-bind:href="rssURL"><i class="rss"></i></a>
       <a target="_blank" href="https://github.com/Kotlin-lang-CN"><i class="github"></i></a>
       <div>
+        <span class="sponser">感谢
+          <a style="display:inline"
+             href="https://account.ucloud.cn/cas/register?utm_source=kotliner&amp;utm_medium=content_pic_pc&amp;utm_campaign=zanzhu&amp;ytag=kotliner">
+            UCloud
+          </a>提供服务赞助
+          <a style="display:inline"
+             href="https://account.ucloud.cn/cas/register?utm_source=kotliner&amp;utm_medium=content_pic_pc&amp;utm_campaign=zanzhu&amp;ytag=kotliner">
+            注册即送 50 元代金券
+          </a>
+        </span><br>
         <span class="icp">ICP备案号 <a target="_blank" href="http://www.miitbeian.gov.cn/">粤ICP备16010004号-3</a></span>
       </div>
     </div>
@@ -73,6 +83,12 @@
         a {
           color: #999;
         }
+      }
+      .sponser {
+        font-size: 14px;
+        color: #999;
+        display: inline-block;
+        vertical-align: top;
       }
     }
 

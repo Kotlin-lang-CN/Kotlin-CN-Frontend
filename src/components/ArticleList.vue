@@ -4,8 +4,8 @@
       <div class="list" v-for="value in articles" v-on:click="forward(value.meta.id)">
         <section>
           <div class="footnote">
-            最后由 <i v-on:click.stop="showUser(value.last_editor)" class="user-link">{{ value.last_editor.username }}</i>
-            更新于 {{ value.meta.last_edit_time | moment}}
+            <i v-on:click.stop="showUser(value.author)" class="user-link">{{ value.author.username }}</i>
+            发布于 {{ value.meta.create_time | moment}}
           </div>
           <div class="flex">
             <div class="logo" v-on:click.stop="showUser(value.author)">
@@ -30,8 +30,9 @@
               <span class="tag focus" v-if="value.meta.tags && value.meta.tags.length >0"
                     v-for="tag in value.meta.tags.split(/;/)">{{ '#' + tag + '&nbsp' }}</span>
               <div class="footnote right">
-                <i v-on:click.stop="showUser(value.author)" class="user-link">{{ value.author.username }}</i>
-                发布于 {{ value.meta.create_time | moment}}
+                最后由 <i v-on:click.stop="showUser(value.last_editor)"
+                       class="user-link">{{ value.last_editor.username}}</i>
+                更新于 {{ value.meta.last_edit_time | moment}}
               </div>
             </div>
           </div>

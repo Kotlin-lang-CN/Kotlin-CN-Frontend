@@ -156,7 +156,7 @@
     },
     computed: {
       logo() {
-        if (LoginMgr.logo || LoginMgr.logo === '' && LoginMgr.email !== '') {
+        if ((!LoginMgr.logo || LoginMgr.logo === '') && LoginMgr.email !== '') {
           return 'https://s.gravatar.com/avatar/' + md5(LoginMgr.email)
         } else {
           return LoginMgr.logo

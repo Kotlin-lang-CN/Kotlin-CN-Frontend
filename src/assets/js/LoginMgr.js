@@ -36,15 +36,6 @@ const LoginMgr = {
     }
   },
 
-  check: function (loginMode, guestMode) {
-    let userInfo = this.info();
-    if (userInfo.isLogin) {
-      return loginMode ? loginMode(userInfo) : '';
-    } else {
-      return guestMode ? guestMode() : '';
-    }
-  },
-
   isAdmin: function () {
     const info = this.info();
     return info.isAdminRole

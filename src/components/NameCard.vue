@@ -3,17 +3,50 @@
     <div class="bg" v-on:click="doCancel"></div>
     <div class="dialog-content">
       <div class="content">
-        <section>
-          <img class="logo" v-bind:src="logo" style="width:150px;height:150px;" width="150" height="150"/>
-          <h2>{{user.username}} <a :href="'mailto:'+user.email"><i
-            class="email"></i></a></h2>
+        <section class="user-base">
+          <img class="logo" v-bind:src="logo" width="100" height="100"/>
+          <h2>{{user.username}}</h2>
+          <p><a :href="'mailto:'+user.email"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+            文章 {{articleCount}}, 回帖 {{replyCount}}
+          </p>
         </section>
         <section class="active-info">
-          <a v-if="me.info().uid === user.uid" :href="userUrl + '/' + user.uid">
-            <i class="fa fa-edit"></i>
-          </a>
-          <p>文章数：{{articleCount}}</p>
-          <p>回帖数：{{replyCount}}</p>
+          <p>
+            <strong>Blog: </strong>
+            <i v-if="!profile.blog || profile.blog === ''">未公开</i>
+            <a class="user-link" v-if="profile.blog && profile.blog !== ''" v-bind:href="profile.blog">{{ profile.blog
+              }}</a>
+          </p>
+          <p>
+            <strong>公司: </strong>
+            <i v-if="!profile.company || profile.company === ''">未公开</i>
+            <span v-if="profile.company && profile.company !== ''">{{ profile.company }}</span>
+          </p>
+          <p>
+            <strong>教育: </strong>
+            <i v-if="!profile.education || profile.education === ''">未公开</i>
+            <span v-if="profile.education && profile.education !== ''">{{ profile.education }}</span>
+          </p>
+          <p>
+            <strong>GitHub: </strong>
+            <i v-if="!profile.github || profile.github === ''">未公开</i>
+            <a class="user-link" v-if="profile.github && profile.github !== ''" v-bind:href="profile.github">
+              {{ profile.github}}
+            </a>
+          </p>
+          <p>
+            <strong>地址: </strong>
+            <i v-if="!profile.location || profile.location === ''">未公开</i>
+            <span v-if="profile.location && profile.location !== ''">{{ profile.location }}</span>
+          </p>
+          <p>
+            <strong>个人简介:</strong><br>
+          </p>
+          <p>
+            <i v-if="!profile.description || profile.description === ''">没什么好说的...</i>
+            <span v-if="profile.description && profile.description !== ''">{{ profile.description }}</span>
+          </p>
+          <a v-if="me.info().uid === user.uid" :href="userUrl + '/' + user.uid"><i class="fa fa-edit"></i></a>
         </section>
       </div>
     </div>
@@ -25,9 +58,13 @@
   import Config from '../assets/js/Config.js';
   import Event from '../assets/js/Event';
   import Net from "../assets/js/Net.js";
-  import md5 from 'md5'
+  import md5 from 'md5';
+  import UserBaseInfo from '../components/UserBaseInfo.vue';
 
   export default {
+    components: {
+      'user-base-info': UserBaseInfo
+    },
     data() {
       return {
         show: false,
@@ -35,7 +72,16 @@
         userUrl: Config.UI.user,
         user: {uid: '', logo: '', email: '', username: ''},
         articleCount: 0,
-        replyCount: 0
+        replyCount: 0,
+        profile: {
+          blog: '',
+          company: '',
+          description: '',
+          education: '',
+          gender: 0,
+          github: '',
+          location: '',
+        }
       }
     },
     created() {
@@ -43,7 +89,7 @@
         this.user = user;
         this.show = true;
         this.async();
-      })
+      });
     },
     methods: {
       doCancel() {
@@ -61,7 +107,11 @@
           condition: {id: this.user.uid}
         }, (resp) => {
           this.replyCount = resp.result[this.user.uid];
-        })
+        });
+        Net.get({
+          url: Config.URL.account.profile,
+          condition: {id: this.user.uid}
+        }, (resp) => this.profile = resp.profile[0]);
       }
     },
     computed: {
@@ -78,7 +128,7 @@
 
 <style scoped>
   .dialog .dialog-content {
-    margin-left: calc(50% - 200px);
+    margin-left: calc(50% - 300px);
   }
 </style>
 
@@ -103,7 +153,7 @@
 
     .dialog-content {
       position: absolute;
-      width: 400px;
+      width: 600px;
       margin-top: 200px;
       padding: 40px;
       box-sizing: border-box;
@@ -114,28 +164,35 @@
 
       .content {
         display: flex;
-      }
 
-      .active-info {
-        margin-left: 20px;
-        width: 100%;
-        i {
-          text-align: right;
+        .user-base {
+          width: 180px;
+          border-right: 1px #eee solid;
+
+          .logo {
+            width: 100px;
+            height: 100px;
+            margin-right: 120px;
+          }
+        }
+
+        .active-info {
+          margin-top: -10px;
+          margin-left: 20px;
           width: 100%;
+          i {
+            text-align: right;
+            width: 100%;
+          }
+          .user-link {
+            color: #2b75e1;
+          }
+        }
+        span {
+          padding-bottom: 5px;
         }
       }
 
-      i.email {
-        display: inline-block;
-        width: 30px;
-        height: 25px;
-        vertical-align: top;
-        margin-top: 3px;
-        background: url(../assets/img/email.png) no-repeat;
-      }
-      span {
-        padding-bottom: 5px;
-      }
     }
   }
 </style>

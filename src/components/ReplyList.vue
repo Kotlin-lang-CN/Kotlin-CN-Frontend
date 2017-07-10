@@ -10,8 +10,7 @@
             <span v-on:click.stop="showUser(value.user)" class="name-card">{{ value.user.username }}</span>
             <span>{{ value.meta.create_time | moment}}</span>
             <small v-if="showDelete(value) && value.meta.state == 0" v-on:click="deleteReply(value)"
-                   class="delete">
-              删除
+                   class="delete">删除
             </small>
             <select v-on:change="updateState(value.meta)" v-model="value.meta.state" class="right"
                     v-if="me.isAdminRole">
@@ -57,6 +56,7 @@
           text: '删除',
           value: 2
         }],
+        requestUrl: '',
       }
     },
     components: {
@@ -65,10 +65,11 @@
     },
     props: {
       articleId: '',
-      requestUrl: ''
     },
     created(){
-      if (this.articleId && this.articleId.length > 0) this.requestUrl = Config.URL.reply.article.format(this.articleId);
+      if (this.articleId && this.articleId.length > 0) {
+        this.requestUrl = Config.URL.reply.article.format(this.articleId);
+      }
       this.getReply(0);
       Event.on('comment-change', () => this.getReply(0));
       Event.on('reply-refresh', () => this.getReply(0));
@@ -115,9 +116,9 @@
           confirm: {
             text: '确定',
             action: () =>
-                Net.post({
-                  url: Config.URL.reply.delete.format(reply.meta.id)
-                }, () => reply.meta.state = 2)
+              Net.post({
+                url: Config.URL.reply.delete.format(reply.meta.id)
+              }, () => reply.meta.state = 2)
           },
           cancel: {
             text: '取消',

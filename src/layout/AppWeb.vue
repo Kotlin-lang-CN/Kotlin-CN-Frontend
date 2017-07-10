@@ -46,12 +46,10 @@
         if (this.page.scrollTop === 0) {
           this.isTop = true;
           Event.emit('page-scroll', this.isTop);
-          debugger;
         } else {
           if (this.isTop) {
             this.isTop = false;
             Event.emit('page-scroll', this.isTop);
-            debugger;
           }
         }
       }, false);

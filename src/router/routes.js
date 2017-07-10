@@ -1,21 +1,42 @@
 export default {
-  '/': './views/Home',
-  '/edit': './views/Edit',
-  '/post/:id': './views/Post',
-  '/edit/:id': './views/Edit',
-  '/topic': './views/Topic',
-  '/topic/:key': './views/Topic',
-  '/topic/:key/:id': './views/Topic',
-  '/user/:uid':'./views/User',
-
-  '/m/': './viewsMobile/Home',
-  '/m/post/:id': './viewsMobile/Post',
-  '/m/edit': './viewsMobile/Edit',
-  '/m/edit/:id': './viewsMobile/Edit',
-  '/m/comments/:id': './viewsMobile/Comments',
-  '/comments/:id': './viewsMobile/Comments',
-  '/m/topic': './views/404',
-  '/m/topic/:key': './views/404',
-  '/m/topic/:key/:id': './views/404',
-  '/m/user/:uid':'./views/User'
+  '/': {
+    pc: './views/Home',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】最好的中文社区论坛',
+  },
+  '/edit': {
+    pc: './views/Edit',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】发布新文章',
+  },
+  '/edit/:id': {
+    pc: './views/Edit',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】编辑文章',
+  },
+  '/post/:id': {
+    pc: './views/Post',
+    mobile: './viewsMobile/Post',
+    title: '【Kotlin CN】最好的中文社区论坛'
+  },
+  '/topic/:key': {
+    pc: './views/Topic',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】专题',
+  },
+  '/topic/:key/:id': {
+    pc: './views/Topic',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】专题',
+  },
+  '/user/:uid': {
+    pc: './views/User',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】个人主页'
+  },
+  '/comments/:id': {
+    pc: './views/Home',
+    mobile: './viewsMobile/Comments',
+    title: '【Kotlin CN】评论',
+  },
 }

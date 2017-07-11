@@ -7,10 +7,16 @@
         </div>
         <div class="cont">
           <div>
-            <span v-on:click.stop="showUser(value.user)" class="name-card">{{ value.user.username }}</span>
+            <b v-on:click.stop="showUser(value.user)" class="name-card user-link">{{ value.user.username }}</b>
+            <span v-if="value.alias">回复
+              <b class="name-card user-reply" v-on:click.stop="showUser(value.alias)"> {{ value.alias.username }}</b>
+            </span>
             <span>{{ value.meta.create_time | moment}}</span>
-            <small v-if="showDelete(value) && value.meta.state == 0" v-on:click="deleteReply(value)"
-                   class="delete">删除
+            <small v-if="showReply(value) && value.meta.state == 0" v-on:click="doReply(value)" class="btn-reply">
+              回复
+            </small>
+            <small v-if="showDelete(value) && value.meta.state == 0" v-on:click="deleteReply(value)" class="btn-delete">
+              删除
             </small>
             <select v-on:change="updateState(value.meta)" v-model="value.meta.state" class="right"
                     v-if="me.isAdminRole">
@@ -27,12 +33,14 @@
       </li>
     </ul>
     <button class="more" v-on:click="loadMore" v-if="hasMore">加载更多</button>
+    <reply-dialog></reply-dialog>
   </div>
 </template>
 
 <script>
   import DisplayPanels from './DisplayPanels.vue';
   import Avatar from './Avatar.vue';
+  import ReplyDialog from './ReplyDialog.vue';
 
   import Event from '../assets/js/Event.js';
   import Net from '../assets/js/Net.js';
@@ -46,22 +54,15 @@
         offset: 0,
         hasMore: true,
         reply: [],
-        options: [{
-          text: '正常',
-          value: 0
-        }, {
-          text: '冻结',
-          value: 1
-        }, {
-          text: '删除',
-          value: 2
-        }],
+        options: [{text: '正常', value: 0}, {text: '冻结', value: 1}, {text: '删除', value: 2}],
         requestUrl: '',
       }
     },
     components: {
+      ReplyDialog,
       'display-panels': DisplayPanels,
-      'app-avatar': Avatar
+      'app-avatar': Avatar,
+      'reply-dialog': ReplyDialog,
     },
     props: {
       articleId: '',
@@ -108,6 +109,9 @@
       showDelete(reply) {
         return !LoginMgr.isAdminRole && LoginMgr.isLogin && LoginMgr.uid === reply.user.uid
       },
+      showReply(reply) {
+        return LoginMgr.isLogin && LoginMgr.uid !== reply.user.uid
+      },
       deleteReply(reply) {
         Event.emit('alert', {
           title: '删除评论',
@@ -125,6 +129,9 @@
             action: () => false
           },
         })
+      },
+      doReply(reply) {
+        Event.emit('reply-to-user', {user: reply.user, id: this.articleId})
       },
       showUser(user) {
         Event.emit('name-card', user)
@@ -155,6 +162,14 @@
           display: inline-block;
           margin-right: 4px;
         }
+        .user-link {
+          color: #333;
+          font-size: 15px;
+        }
+        .user-reply {
+          color: #333;
+          font-size: 15px;
+        }
         .cont {
           margin-left: 8px;
           width: 90%;
@@ -174,12 +189,21 @@
         color: #6ba0f1;
         font-size: 16px;
       }
-      li:hover .delete {
+      li:hover .btn-delete {
         display: inline-block;
       }
-      .delete {
+      .btn-delete {
         color: red;
         display: none;
+        cursor: pointer;
+      }
+      li:hover .btn-reply {
+        display: inline-block;
+      }
+      .btn-reply {
+        color: #6ba0f1;
+        display: none;
+        cursor: pointer;
       }
       .name-card {
         cursor: pointer;

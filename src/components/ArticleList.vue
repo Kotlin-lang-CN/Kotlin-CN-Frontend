@@ -163,70 +163,69 @@
       border-top: 1px #f1f1f1 solid;
       display: block;
       cursor: pointer;
-      section {
-        padding: 12px 0 30px 0;
-        text-align: left;
-        background: white;
-        .footnote {
-          font-size: 12px;
+      padding: 10px 0 12px 0;
+      text-align: left;
+      background: white;
+
+      .footnote {
+        font-size: 12px;
+        color: #999;
+      }
+      .flex {
+        margin-top: 16px;
+        position: relative;
+        display: flex;
+        .wrap {
+          margin-left: 10px;
+        }
+        .title {
+          line-height: 28px;
+          font-size: 24px;
+          color: #333;
+          margin-bottom: 6px;
+        }
+        .tag {
+          display: inline-block;
+          font-size: 14px;
           color: #999;
         }
-        .flex {
-          margin-top: 16px;
-          position: relative;
-          display: flex;
-          .wrap {
-            margin-left: 10px;
-          }
-          .title {
-            line-height: 28px;
-            font-size: 24px;
-            color: #333;
-            margin-bottom: 6px;
-          }
-          .tag {
-            display: inline-block;
-            font-size: 14px;
-            color: #999;
-          }
-          .category {
-            display: inline-block;
-            background-color: #256fe8;
-            border-radius: 2px;
-            color: white;
-            margin-right: 10px;
-            padding: 0 7px;
-          }
-          .reply-count {
-            font-size: 18px;
-            padding: 0 18px;
-            background-color: #c9dcf6;
-            color: white;
-          }
-          .delete {
-            display: none;
-            font-size: 14px;
-            color: red;
-          }
-          .fine {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            float: right;
-            margin-top: 3px;
-            margin-left: 12px;
-            background: url(../assets/img/fine.png) no-repeat;
-          }
-          .extra {
-            position: absolute;
-            right: 0;
-            top: -3px;
-          }
-          .right {
-            position: absolute;
-            right: 0;
-            bottom: 5px;
-          }
+        .category {
+          display: inline-block;
+          background-color: #256fe8;
+          border-radius: 2px;
+          color: white;
+          margin-right: 10px;
+          padding: 0 7px;
+        }
+        .reply-count {
+          font-size: 18px;
+          padding: 0 18px;
+          background-color: #c9dcf6;
+          color: white;
+        }
+        .delete {
+          display: none;
+          font-size: 14px;
+          color: red;
+        }
+        .fine {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          float: right;
+          margin-top: 3px;
+          margin-left: 12px;
+          background: url(../assets/img/fine.png) no-repeat;
+        }
+        .extra {
+          position: absolute;
+          right: 0;
+          top: -3px;
+        }
+        .right {
+          position: absolute;
+          right: 0;
+          bottom: 5px;
         }
       }
     }

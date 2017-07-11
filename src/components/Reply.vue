@@ -40,12 +40,8 @@
       getReplyCount(){
         Net.get({
           url: Config.URL.reply.count,
-          condition: {
-            id: this.articleId
-          }
-        }, (resp) => {
-          this.replyCount = resp.data[this.articleId];
-        })
+          condition: {id: this.articleId}
+        }, (resp) => this.replyCount = resp.data[this.articleId])
       },
     }
   }

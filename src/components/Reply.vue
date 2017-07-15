@@ -1,9 +1,9 @@
 <template>
   <div class="reply">
     <header>共收到{{ replyCount }}条评论</header>
-    <reply-list :articleId="articleId"></reply-list>
+    <reply-list :articleId.sync="articleId"></reply-list>
     <header>回帖</header>
-    <markdown-comment :articleId="articleId"></markdown-comment>
+    <markdown-comment :articleId.sync="articleId"></markdown-comment>
   </div>
 </template>
 <script>
@@ -31,7 +31,6 @@
     },
     created() {
       this.getReplyCount();
-      Event.on('comment-change', () => this.getReplyCount());
       Event.on('login', () => {
         if (this.isAdminRole) this.getReplyCount();
       });
@@ -43,6 +42,11 @@
           condition: {id: this.articleId}
         }, (resp) => this.replyCount = resp.data[this.articleId])
       },
+    },
+    watch: {
+      articleId() {
+        this.getReplyCount()
+      }
     }
   }
 </script>

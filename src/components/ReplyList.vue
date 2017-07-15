@@ -55,7 +55,6 @@
         hasMore: true,
         reply: [],
         options: [{text: '正常', value: 0}, {text: '冻结', value: 1}, {text: '删除', value: 2}],
-        requestUrl: '',
       }
     },
     components: {
@@ -68,9 +67,6 @@
       articleId: '',
     },
     created(){
-      if (this.articleId && this.articleId.length > 0) {
-        this.requestUrl = Config.URL.reply.article.format(this.articleId);
-      }
       this.getReply(0);
       Event.on('comment-change', () => this.getReply(0));
       Event.on('reply-refresh', () => this.getReply(0));
@@ -78,11 +74,20 @@
         if (this.isAdminRole) this.getReply(0);
       });
     },
+    watch: {
+      articleId(newId, oldId) {
+        window.console.log(newId);
+        this.getReply(0, newId)
+      }
+    },
     methods: {
-      getReply(index) {
+      requestUrl(aid) {
+        return Config.URL.reply.article.format(aid ? aid : this.articleId)
+      },
+      getReply(index, aid) {
         const limit = 20;
         Net.get({
-          url: this.requestUrl,
+          url: this.requestUrl(aid),
           condition: {
             offset: index,
             limit: limit
@@ -104,7 +109,7 @@
           condition: {
             state: reply.state
           },
-        }, () => window.console.log("success!"), () => this.get(this.requestUrl, 0))
+        }, () => window.console.log("success!"), () => this.get(this.requestUrl(), 0))
       },
       showDelete(reply) {
         return !LoginMgr.isAdminRole && LoginMgr.isLogin && LoginMgr.uid === reply.user.uid

@@ -95,35 +95,35 @@ const Config = {
     data: {
       p1: {
         title: '【视频】Kotlin 入门到进阶',
-        link: '/topic/p1/',
+        link: '/topic/p1/6284762828886261760',
         logo: 'fa fa-puzzle-piece',
         color: '#ea4335',
-        toc: '6284762828886261760',
+        toc: '6289706691865542656',
         readme: '6284762828886261760'
       },
       p2: {
         title: 'Kotlin in Chinese',
-        link: '/topic/p2/',
+        link: '/topic/p2/6284229824772468736',
         logo: 'fa fa-send',
         color: '#4285f4',
         toc: '6287247888258359296',
-        readme: '6284215952900517888'
+        readme: '6284229824772468736'
       },
       p3: {
         title: '社区博客',
         link: '//www.kotliner.cn',
         logo: 'fa fa-comments-o',
         color: '#fbbc05',
-        toc: '6287247888258359296',
-        readme: '6284762828886261760'
+        toc: '',
+        readme: ''
       },
       p4: {
         title: '中文站',
         link: '//kotlincn.net',
         logo: 'fa fa-support',
         color: '#4285f4',
-        toc: '6289370960008368128',
-        readme: '6284215952900517888'
+        toc: '',
+        readme: ''
       }
     }
   }

@@ -65,6 +65,7 @@
     },
     props: {
       articleId: '',
+      uid: undefined
     },
     created(){
       this.getReply(0);
@@ -75,14 +76,15 @@
       });
     },
     watch: {
-      articleId(newId, oldId) {
-        window.console.log(newId);
+      articleId(newId) {
         this.getReply(0, newId)
       }
     },
     methods: {
       requestUrl(aid) {
-        return Config.URL.reply.article.format(aid ? aid : this.articleId)
+        return this.uid ?
+          Config.URL.creator.reply.format(this.uid) :
+          Config.URL.reply.article.format(aid ? aid : this.articleId)
       },
       getReply(index, aid) {
         const limit = 20;

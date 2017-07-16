@@ -2,7 +2,7 @@ export default {
   '/': {
     pc: './views/Home',
     mobile: './viewsMobile/Home',
-    title: '【Kotlin CN】最好的中文社区论坛',
+    title: '【Kotlin CN】做最好的Kotlin中文社区',
   },
   '/edit': {
     pc: './views/Edit',
@@ -17,7 +17,7 @@ export default {
   '/post/:id': {
     pc: './views/Post',
     mobile: './viewsMobile/Post',
-    title: '【Kotlin CN】最好的中文社区论坛'
+    title: '【Kotlin CN】做最好的Kotlin中文社区'
   },
   '/topic/:key': {
     pc: './views/Topic',

@@ -89,7 +89,7 @@ const Config = {
   },
   Topic: {
     select: [
-      'p1', 'p2', 'p3', 'p4'
+      'p1', 'Kotlin-for-Android-Dev', 'p3', 'p4',
     ],
     def: "p1",
     data: {
@@ -124,6 +124,14 @@ const Config = {
         color: '#4285f4',
         toc: '',
         readme: ''
+      },
+      'Kotlin-for-Android-Dev': {
+        title: 'Kotlin for Android Dev',
+        link: '/topic/Kotlin-for-Android-Dev/6292540246044377088',
+        logo: 'fa fa-send',
+        color: '#4285f4',
+        toc: '6292543219873017856',
+        readme: '6292540246044377088'
       }
     }
   }

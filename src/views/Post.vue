@@ -23,7 +23,6 @@
     </div>
     <div class="side">
       <article-side :id="id" class="flower"></article-side>
-      <div class="article-social"></div>
     </div>
   </app-layout>
 </template>
@@ -82,10 +81,10 @@
               const metaTitle = '【Kotlin-CN】' + resp.article.title + ' by ' + resp.author.username;
               this.seekAnchor();
               $("title").html(metaTitle);
-              $('.article-social').share({
+              $('#article-social').share({
                 title: metaTitle + ' 我们致力于提供最好的Kotlin中文教程 共建最潮流的Kotlin中文社区',
                 description: resp.content.content.substr(0, 30) + '...',
-                sites: ['qq', 'weibo', 'wechat']
+                sites: ['qq', 'weibo', 'wechat', 'qzone', 'douban', 'google', 'facebook', 'twitter']
               })
             }, 200)
           }, (resp) => {
@@ -153,22 +152,12 @@
     }
   }
 
-  div.side {
+  .side {
     display: none;
     width: 200px;
     position: fixed;
     margin-left: 70%;
-    top: 20%;
-
-    border: 1px #f1f1f1 solid;
-    border-radius: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    background-color: white;
-
-    .article-social {
-      padding-top: 10px;
-    }
+    top: 26%;
   }
 
   @media screen and (min-width: 1200px) {

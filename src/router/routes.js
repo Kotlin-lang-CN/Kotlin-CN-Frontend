@@ -39,4 +39,9 @@ export default {
     mobile: './viewsMobile/Comments',
     title: '【Kotlin CN】评论',
   },
+  '/message': {
+    pc: './views/Message',
+    mobile: './viewsMobile/Home',
+    title: '【Kotlin CN】未读消息'
+  }
 }

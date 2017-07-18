@@ -180,6 +180,7 @@
           margin-top: -10px;
           margin-left: 20px;
           width: 100%;
+          text-align: left;
           i {
             text-align: right;
             width: 100%;

@@ -64,23 +64,21 @@
       post(){
         if (this.input.length === 0) {
           layer.msg("评论不能为空");
-          return;
         } else if (this.input.length < 10) {
           layer.msg("评论不少于十个字");
-          return;
-        }
-        LoginMgr.require(() => {
-          Net.post({
-            url: Config.URL.reply.article.format(this.articleId),
-            condition: {content: this.input}
-          }, (data) => {
-            if (data.id.length > 0) {
+        } else {
+          LoginMgr.require(() => {
+            Net.post({
+              url: Config.URL.reply.article.format(this.articleId),
+              condition: {content: this.input}
+            }, () => {
               this.input = '';
-              Event.emit('comment-change');
               layer.msg("已评论");
-            }
+              Net.post({url: Config.URL.message.subscribe.format(this.articleId)},
+                () => Event.emit('comment-change'));
+            })
           })
-        })
+        }
       }
     },
     computed: {

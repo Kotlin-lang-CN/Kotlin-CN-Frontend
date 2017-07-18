@@ -3,13 +3,11 @@
     <div class="user-root">
       <user-base-info :uid="uid"></user-base-info>
       <ul class="user-nav">
-        <li :class="{'select': navigation===nav_article }" v-on:click="navigation=nav_article">热门文章</li>
+        <li :class="{'select': navigation===nav_article }" v-on:click="navigation=nav_article">文章</li>
         <li :class="{'select': navigation===nav_reply }" v-on:click="navigation=nav_reply">最近回复</li>
-        <li :class="{'select': navigation===nav_notify }" v-on:click="navigation=nav_notify">新消息提醒</li>
       </ul>
       <user-article :requestUrl="articleListUrl" :class="{'hide':navigation!==nav_article}"></user-article>
       <user-reply :uid="uid" :class="{'hide':navigation!==nav_reply}"></user-reply>
-      <div :class="{'hide':navigation!==nav_notify}" class="notify">没有新消息提醒</div>
     </div>
   </app-layout>
 </template>

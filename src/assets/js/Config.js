@@ -7,7 +7,8 @@ const CGI = {
   rss: 'https://debug.kotlin-cn.org/api/rss',
   flower: 'https://debug.kotlin-cn.org/api/flower',
   misc: 'https://debug.kotlin-cn.org/api/misc',
-  creator: 'https://debug.kotlin-cn.org/api/creator'
+  creator: 'https://debug.kotlin-cn.org/api/creator',
+  message: 'https://debug.kotlin-cn.org/api/message'
 };
 
 const Config = {
@@ -69,6 +70,12 @@ const Config = {
       reply_count: CGI.creator + '/reply/count',
       article: CGI.creator + '/article',
       reply: CGI.creator + '/reply'
+    },
+    message: {
+      latest: CGI.message + '/latest',
+      subscrib_count: CGI.message + '/article/subscribe/count',
+      subscribe: CGI.message + '/article/{0}/subscribe',
+      unsubscribe: CGI.message + '/article/{0}/unsubscribe'
     }
   },
   OAuth: {
@@ -85,7 +92,8 @@ const Config = {
     post: '/post',
     comments: '/comments',
     topic: '/topic',
-    user: '/user'
+    user: '/user',
+    message: '/message'
   },
   Topic: {
     select: [

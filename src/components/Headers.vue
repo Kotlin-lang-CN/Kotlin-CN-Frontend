@@ -6,7 +6,7 @@
         <div class="menu-main"><a href="/" title="论坛" v-bind:class="{'sel':current === 'home'}">论坛</a></div>
         <div class="menu-main"><a href="//www.kotlincn.net/docs/reference" title="wiki"
                                   v-bind:class="{'sel':current === 'wiki'}">Wiki</a></div>
-        <div class="menu-main"><a href="//www.kotliner.cn" title="博客">博客</a></div>
+        <div class="menu-main"><a href="//blog.kotliner.cn" title="博客">博客</a></div>
         <div class="menu-main"><a href="//www.kotlincn.net" title="中文站">中文站</a></div>
 
         <section class="menu-user menu-right" v-if="!me.isLogin">
@@ -25,11 +25,14 @@
             </ul>
           </div>
         </section>
-
         <section class="menu-user menu-right" v-if="me.isLogin">
           <div class="btn">
-            <span><i class="add-icon"></i></span>
+            <span><i class="publish-more"></i></span>
             <div class="sub-menu"><a :href="urlEdit">发布新话题</a></div>
+          </div>
+          <div class="btn">
+            <span><i class="fa fa-bell" style="font-size: 20px"></i></span>
+            <div class="sub-menu"><a href="/message">我的消息</a></div>
           </div>
           <div class="btn">
             <span>
@@ -66,7 +69,7 @@
 
   function getParam(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
-            .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+        .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
   }
 
   export default {
@@ -81,7 +84,6 @@
         urlRegister: Config.UI.register,
         urlAccount: Config.UI.account,
         urlEdit: Config.UI.edit,
-        urlWiki: Config.UI.wiki,
         urlLogin: Config.UI.login,
         me: LoginMgr.info(),
         moduleShow: true,
@@ -99,9 +101,6 @@
         this.isLoading = true;
         this.handleGithubAuth(code, state)
       }
-      const url = window.location.href,
-          idx = url.indexOf(Config.UI.wiki);
-      this.current = idx > 0 ? 'wiki' : 'home';
     },
     methods: {
       login() {
@@ -112,10 +111,10 @@
           url: Config.URL.github.createState
         }, (resp) => {
           window.location.href = 'http://github.com/login/oauth/authorize' +
-              '?state=' + resp.state +
-              '&client_id=' + Config.OAuth.github.clientId +
-              '&redirect_url=' + window.location.host +
-              '&scope=' + Config.OAuth.github.scope
+            '?state=' + resp.state +
+            '&client_id=' + Config.OAuth.github.clientId +
+            '&redirect_url=' + window.location.host +
+            '&scope=' + Config.OAuth.github.scope
         })
       },
       handleGithubAuth(code, state) {
@@ -140,6 +139,9 @@
       },
       userHome(){
         window.location.href = Config.UI.user + '/' + LoginMgr.info().uid;
+      },
+      userMessage() {
+        window.location.href = Config.UI.message
       },
       register() {
         Event.emit('request_register')
@@ -207,19 +209,13 @@
           }
         }
         .menu-user {
-          .add-icon {
+          .publish-more {
             display: inline-block;
             width: 18px;
             height: 18px;
             background: url(../assets/img/add-icon.png) no-repeat;
           }
-          .choice-icon {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            vertical-align: bottom;
-            background: url(../assets/img/choice-icon.png) no-repeat;
-          }
+
           .btn {
             position: relative;
             vertical-align: top;
@@ -228,21 +224,61 @@
             text-align: center;
           }
           .btn > span {
-            margin-right: auto;
+            margin-right: -5px;
             display: block;
-            line-height: 86px;
-            min-height: 86px;
-            width: 78px;
+            line-height: 70px;
+            min-height: 70px;
+            width: 65px;
+            text-align: center;
             i {
-              margin-top: 32px;
+              margin-top: 36px;
             }
             button {
               height: 66px;
               color: #333;
             }
             .user-logo {
-              margin-top: 16px;
-              margin-bottom: -16px;
+              margin-top: 20px;
+              margin-bottom: -8px;
+              margin-left: 5px;
+            }
+            .choice-icon {
+              display: inline-block;
+              margin-left: -8px;
+              margin-top: 10px;
+              width: 18px;
+              height: 18px;
+              vertical-align: bottom;
+              background: url(../assets/img/choice-icon.png) no-repeat;
+            }
+          }
+          .btn > span .half {
+            margin-right: -5px;
+            display: block;
+            line-height: 70px;
+            min-height: 70px;
+            width: 30px;
+            text-align: center;
+            i {
+              margin-top: 36px;
+            }
+            button {
+              height: 66px;
+              color: #333;
+            }
+            .user-logo {
+              margin-top: 20px;
+              margin-bottom: -8px;
+              margin-left: 5px;
+            }
+            .choice-icon {
+              display: inline-block;
+              margin-left: -8px;
+              margin-top: 10px;
+              width: 18px;
+              height: 18px;
+              vertical-align: bottom;
+              background: url(../assets/img/choice-icon.png) no-repeat;
             }
           }
           .btn > span:hover {

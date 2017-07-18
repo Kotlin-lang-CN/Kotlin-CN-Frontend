@@ -6,7 +6,7 @@
       </div>
       <ul>
         <li><span class="hint">使用 PC 登录, 体验完整功能</span></li>
-        <li><a href="https://www.kotliner.cn/">博客</a></li>
+        <li><a href="https://blog.kotliner.cn/">博客</a></li>
         <li><a href="https://www.kotlincn.net/docs/reference/">Wiki</a></li>
         <li><a href="https://www.kotlincn.net/">中文站</a></li>
       </ul>

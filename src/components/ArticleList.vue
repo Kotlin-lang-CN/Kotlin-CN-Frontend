@@ -179,17 +179,18 @@
           margin-left: 10px;
         }
         .title {
-          line-height: 28px;
-          font-size: 24px;
+          line-height: 24px;
+          font-size: 18px;
           color: #333;
           margin-bottom: 6px;
         }
         .tag {
           display: inline-block;
-          font-size: 14px;
+          font-size: 13px;
           color: #999;
         }
         .category {
+          font-size:13px;
           display: inline-block;
           background-color: #256fe8;
           border-radius: 2px;

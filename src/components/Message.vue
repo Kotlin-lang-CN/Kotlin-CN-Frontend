@@ -7,7 +7,7 @@
           <div class="message-head">
             <span class="username" @click.stop="showUser(item.from)">{{ item.from.username }}</span>
             评论了你关注的文章
-            <span class="timestamp">{{ item.reply.create_time | moment}}</span>
+            <span class="timestamp" v-if="item.reply">{{ item.reply.create_time | moment}}</span>
           </div>
           <span class="article">{{ item.article.title }}</span>
         </div>
@@ -17,14 +17,14 @@
           <div class="message-head">
             <span class="username" @click.stop="showUser(item.from)">{{ item.from.username }}</span>
             回复了你的评论
-            <span class="timestamp">{{ item.reply.create_time | moment}}</span>
+            <span class="timestamp" v-if="item.reply">{{ item.reply.create_time | moment}}</span>
           </div>
           <span class="article">{{ item.article.title }}</span><br>
           <br>
         </div>
       </li>
     </ul>
-    <button class="more" @click="loadMore" v-if="hasMore">加载更多</button>
+    <button class="more" v-if="hasMore">查看更多</button>
     <div class="load-end" v-if="!hasMore">没有更多的消息了</div>
   </div>
 </template>
@@ -54,15 +54,19 @@
       }
     },
     created(){
-      if (LoginMgr.isLogin) {
-        this.getMessage(0);
-      } else {
-        this.message = [];
-        this.offset = 0;
-        this.hasMore = true;
-      }
+      this.init();
+      setInterval(this.init, 10000)
     },
     methods: {
+      init() {
+        if (this.me.isLogin) {
+          this.getMessage(0);
+        } else {
+          this.message = [];
+          this.offset = 0;
+          this.hasMore = true;
+        }
+      },
       toArticle(aid) {
         window.location.href = Config.UI.post + '/' + aid
       },
@@ -79,7 +83,6 @@
           resp.message.forEach((msg) => {
             const inner = BigJson.parse(msg.content);
             if (msg.type === 0 || msg.type === 1) {
-              window.console.log(msg);
               msg.from = inner.from;
               msg.article = inner.article;
               msg.reply = inner.reply;
@@ -93,9 +96,6 @@
           this.message = this.message.concat(list);
         })
       },
-      loadMore(){
-        this.getMessage(this.offset);
-      }
     }
   }
 </script>

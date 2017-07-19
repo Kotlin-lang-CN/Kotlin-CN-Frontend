@@ -32,7 +32,7 @@
     computed: {
       logo() {
         if (this.user.logo === '' && this.user.email !== '') {
-          return 'https://s.gravatar.com/avatar/' + md5(this.user.email)
+          return 'https://secure.gravatar.com/avatar/' + md5(this.user.email)
         } else {
           return this.user.logo
         }

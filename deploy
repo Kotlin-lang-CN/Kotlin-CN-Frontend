@@ -9,7 +9,7 @@ if [ 'release' = ${mode} ]; then
   cnpm install && npm run build
   cp /tmp/Config.js src/assets/js/Config.js
 
-  rsync -azP dist/ root@106.75.105.42:frontend/
+  rsync -azP dist/ root@kotliner.cn:frontend/
 
 elif [ 'dev' = ${mode} ]; then
 

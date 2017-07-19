@@ -23,6 +23,38 @@
   </app-layout>
 </template>
 
+<style scoped lang="less">
+  .comments {
+    font-size: .28rem;
+    background-color: #fcfcfc;
+    color: #999;
+    header {
+      background-color: white;
+      height: 30px;
+      padding-left: 15px;
+      margin-top: 10px;
+      border-bottom: 1px #e3e3e3 solid;
+    }
+    li {
+      padding: 15px 0;
+      margin: 0 15px;
+      border-bottom: 1px #e3e3e3 solid;
+      display: flex;
+      span {
+        font-size: .28rem;
+        display: inline-block;
+        margin-right: 4px;
+        margin-bottom: 6px;
+      }
+      .cont {
+        margin-left: 8px;
+        width: 90%;
+      }
+    }
+  }
+
+</style>
+
 <script>
   import Net from "../assets/js/Net.js";
   import Config from "../assets/js/Config.js";
@@ -89,35 +121,3 @@
     }
   }
 </script>
-
-<style scoped lang="less">
-  .comments {
-    font-size: .28rem;
-    background-color: #fcfcfc;
-    color: #999;
-    header {
-      background-color: white;
-      height: 30px;
-      padding-left: 15px;
-      margin-top: 10px;
-      border-bottom: 1px #e3e3e3 solid;
-    }
-    li {
-      padding: 15px 0;
-      margin: 0 15px;
-      border-bottom: 1px #e3e3e3 solid;
-      display: flex;
-      span {
-        font-size: .28rem;
-        display: inline-block;
-        margin-right: 4px;
-        margin-bottom: 6px;
-      }
-      .cont {
-        margin-left: 8px;
-        width: 90%;
-      }
-    }
-  }
-
-</style>

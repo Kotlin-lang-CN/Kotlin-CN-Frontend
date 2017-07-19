@@ -32,7 +32,9 @@
           </div>
           <div class="btn">
             <span><i class="fa fa-bell" style="font-size: 20px"></i></span>
-            <div class="sub-menu"><a href="/message">我的消息</a></div>
+            <div class="latest-msg">
+              <message></message>
+            </div>
           </div>
           <div class="btn">
             <span>
@@ -59,13 +61,15 @@
   </div>
 </template>
 <script>
+  import Message from '../components/Message.vue';
+
   import LoginMgr from '../assets/js/LoginMgr.js';
   import Event from '../assets/js/Event.js';
   import Config from '../assets/js/Config.js';
   import Avatar from "./Avatar.vue";
   import Net from '../assets/js/Net.js';
   import Cookie from 'js-cookie';
-  import vueLoading from 'vue-loading-template'
+  import vueLoading from 'vue-loading-template';
 
   function getParam(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
@@ -75,7 +79,8 @@
   export default {
     components: {
       "app-avatar": Avatar,
-      'vue-loading': vueLoading
+      'vue-loading': vueLoading,
+      'message': Message,
     },
     data: function () {
       return {
@@ -317,6 +322,40 @@
               color: #2572e5;
             }
           }
+          .btn .latest-msg {
+            display: none;
+          }
+          .btn:hover .latest-msg {
+            position: absolute;
+            background-color: white;
+            right: -1px;
+            width: 350px;
+            height: auto;
+            display: block;
+            box-shadow: 0 0 10px #ccc;
+            a {
+              display: block;
+              line-height: 62px;
+              color: #333;
+            }
+            button {
+              display: block;
+              line-height: 50px;
+              color: #333;
+              height: 62px;
+              width: 182px;
+            }
+          }
+          .btn .latest-msg:hover {
+            background-color: #f8fbff;
+            a {
+              color: #2572e5;
+            }
+            button {
+              color: #2572e5;
+            }
+          }
+
           .btn ul {
             display: none;
           }

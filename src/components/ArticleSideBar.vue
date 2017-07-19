@@ -95,6 +95,8 @@
           Net.get({
             url: Config.URL.message.subscribe.format(this.id),
           }, (resp) => this.is_subscribe = resp.subscribe);
+        } else {
+          this.is_subscribe = false
         }
       },
       subscribe() {

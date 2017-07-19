@@ -171,6 +171,12 @@
             next()
           }
         }).then(() => {
+          const finish = () => {
+            layer.msg(this.updateMode ? '修改成功' : '发布成功');
+            setTimeout(() => {
+              window.location.href = '/post/' + this.id
+            }, 500)
+          };
           Net.post({
             url: this.updateMode ? Config.URL.article.update.format(this.id) : Config.URL.article.post,
             condition: {
@@ -182,10 +188,13 @@
             }
           }, (resp) => {
             if (resp.id) this.id = resp.id;
-            layer.msg(this.updateMode ? '修改成功' : '发布成功');
-            setTimeout(() => {
-              window.location.href = '/post/' + this.id
-            }, 500)
+            if (!this.updateMode) {
+              Net.post({
+                url: Config.URL.message.subscribe.format(this.id)
+              }, finish)
+            } else {
+              finish()
+            }
           });
         });
       },

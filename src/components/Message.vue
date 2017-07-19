@@ -1,30 +1,32 @@
 <template>
-  <app-layout>
-    <div class="message">
-      <ul>
-        <li v-for="item in message">
-          <div v-if="item.type === 0" class="type-to-article" @click="toArticle(item.article.id)">
-            <!-- reply to subscribe article -->
+  <div class="message">
+    <ul class="message-list">
+      <li v-for="item in message">
+        <div v-if="item.type === 0" class="type-to-article" @click="toArticle(item.article.id)">
+          <!-- reply to subscribe article -->
+          <div class="message-head">
             <span class="username" @click.stop="showUser(item.from)">{{ item.from.username }}</span>
-            评论了你的文章
-            <span class="article">{{ item.article.title }}</span>
-            <span class="timestamp right">{{ item.create_time | moment}}</span>
+            评论了你关注的文章
+            <span class="timestamp">{{ item.reply.create_time | moment}}</span>
           </div>
+          <span class="article">{{ item.article.title }}</span>
+        </div>
 
-          <div v-if="item.type === 1" class="type-to-reply" @click="toArticle(item.article.id)">
-            <!-- reply to comment -->
+        <div v-if="item.type === 1" class="type-to-reply" @click="toArticle(item.article.id)">
+          <!-- reply to comment -->
+          <div class="message-head">
             <span class="username" @click.stop="showUser(item.from)">{{ item.from.username }}</span>
-            在文章
-            <span class="article">{{ item.article.title }}</span>
-            下回复了你的评论
-            <span class="timestamp right">{{ item.create_time | moment}}</span>
+            回复了你的评论
+            <span class="timestamp">{{ item.reply.create_time | moment}}</span>
           </div>
-        </li>
-      </ul>
-      <button class="more" v-on:click="loadMore" v-if="hasMore">加载更多</button>
-      <div class="load-end" v-if="!hasMore">没有更多的消息了</div>
-    </div>
-  </app-layout>
+          <span class="article">{{ item.article.title }}</span><br>
+          <br>
+        </div>
+      </li>
+    </ul>
+    <button class="more" @click="loadMore" v-if="hasMore">加载更多</button>
+    <div class="load-end" v-if="!hasMore">没有更多的消息了</div>
+  </div>
 </template>
 
 <script>
@@ -34,9 +36,9 @@
   import BigJson from '../assets/js/Parse';
   import Event from '../assets/js/Event';
 
-  import DisplayPanels from "../components/DisplayPanels.vue";
+  import DisplayPanels from "./DisplayPanels.vue";
   import AppLayout from '../layout/AppWeb.vue';
-  import NameCard from '../components/NameCard.vue';
+  import NameCard from './NameCard.vue';
 
   export default {
     components: {
@@ -46,14 +48,19 @@
     data () {
       return {
         me: LoginMgr,
-        content: '',
         offset: 0,
         hasMore: true,
         message: [],
       }
     },
     created(){
-      this.getMessage(0);
+      if (LoginMgr.isLogin) {
+        this.getMessage(0);
+      } else {
+        this.message = [];
+        this.offset = 0;
+        this.hasMore = true;
+      }
     },
     methods: {
       toArticle(aid) {
@@ -97,18 +104,43 @@
   .message {
     background-color: #fcfcfc;
     color: #999;
-    width: 1120px;
+    width: auto;
     margin: auto;
 
+    .message-list {
+      > li {
+        text-align: left;
+        background-color: white;
+        cursor: pointer;
+        height: auto;
+        padding: 5px 15px 5px 15px;
+        font-size: 12px;
+      }
+      > li:hover {
+        background-color: ghostwhite;
+      }
+      .message-head {
+        width: 100%;
+        padding: 5px;
+        .username {
+          color: #2e8ded;
+        }
+        .timestamp {
+          float: right;
+        }
+      }
+      .article {
+        font-size: 15px;
+      }
+    }
     .more {
       text-align: center;
       height: auto;
     }
-
     .load-end {
       text-align: center;
       color: #8D8D8D;
-      padding: 15px;
+      padding: 8px;
       height: auto;
     }
   }

@@ -14,8 +14,8 @@
           <p>
             <strong>Blog: </strong>
             <i v-if="!profile.blog || profile.blog === ''">未公开</i>
-            <a class="user-link" v-if="profile.blog && profile.blog !== ''" v-bind:href="profile.blog">{{ profile.blog
-              }}</a>
+            <a class="user-link" v-if="profile.blog && profile.blog !== ''"
+               v-bind:href="link(profile.blog)">{{ profile.blog}}</a>
           </p>
           <p>
             <strong>公司: </strong>
@@ -30,9 +30,8 @@
           <p>
             <strong>GitHub: </strong>
             <i v-if="!profile.github || profile.github === ''">未公开</i>
-            <a class="user-link" v-if="profile.github && profile.github !== ''" v-bind:href="profile.github">
-              {{ profile.github}}
-            </a>
+            <a class="user-link" v-if="profile.github && profile.github !== ''"
+               v-bind:href="link(profile.github)">{{ profile.github}}</a>
           </p>
           <p>
             <strong>地址: </strong>
@@ -95,7 +94,7 @@
       doCancel() {
         this.show = false
       },
-      async(){
+      async() {
         Net.get({
           url: Config.URL.creator.article_count,
           condition: {id: this.user.uid}
@@ -112,6 +111,13 @@
           url: Config.URL.account.profile,
           condition: {id: this.user.uid}
         }, (resp) => this.profile = resp.profile[0]);
+      },
+      link(href) {
+        if (href.startsWith("http")) {
+          return href
+        } else {
+          return "https://{0}".format(href)
+        }
       }
     },
     computed: {

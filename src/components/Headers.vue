@@ -73,7 +73,7 @@
 
   function getParam(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
-        .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
+      .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
   }
 
   export default {
@@ -142,7 +142,7 @@
           }
         }, () => window.location.href = '/');
       },
-      userHome(){
+      userHome() {
         window.location.href = Config.UI.user + '/' + LoginMgr.info().uid;
       },
       userMessage() {

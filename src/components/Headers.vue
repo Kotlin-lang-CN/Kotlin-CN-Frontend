@@ -145,9 +145,6 @@
       userHome() {
         window.location.href = Config.UI.user + '/' + LoginMgr.info().uid;
       },
-      userMessage() {
-        window.location.href = Config.UI.message
-      },
       register() {
         Event.emit('request_register')
       },

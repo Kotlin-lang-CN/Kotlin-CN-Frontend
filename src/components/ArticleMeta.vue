@@ -55,12 +55,6 @@ export default {
   padding: 30px 0 30px 0;
   margin-bottom: 16px;
   font-size: 24px;
-  .title {
-    color: #333;
-    font-weight: bolder;
-    display: inline-block;
-    font-size: 30px;
-  }
   .category {
     display: inline-block;
     background-color: #2572e5;
@@ -68,9 +62,15 @@ export default {
     color: white;
     margin-right: 5px;
     padding: 0 7px;
-    font-size: 16px;
+    font-size: 15px;
     vertical-align: top;
-    margin-top: 12px;
+    margin-top: 10px;
+  }
+  .title {
+    color: #333;
+    font-weight: bolder;
+    display: inline;
+    font-size: 26px;
   }
   .tag {
     font-size: 10px;
@@ -79,7 +79,7 @@ export default {
     color: #333;
     padding: 0 2px;
     vertical-align: top;
-    margin-top: 15px;
+    margin-top: 12px;
     line-height: 20px;
     margin-right: 8px;
   }

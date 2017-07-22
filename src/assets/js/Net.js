@@ -1,6 +1,7 @@
 import bigJSON from './Parse.js';
 import Cookie from 'js-cookie';
 import Event from './Event.js';
+import LoginMgr from "./LoginMgr";
 
 function generateHeaders() {
   let deviceId = Cookie.get("X-App-Device");
@@ -30,10 +31,15 @@ function generateHeaders() {
 class Net {
   ajax(request, success, fail) {
     let errHandler = function (error) {
-      const msg = (error.code < 0 ? '系统错误' : error.msg) + '(错误码 ' + error.code + ')';
-      Event.emit('error', error.msg ? msg : error);
-      console.log(error);
-      if (fail) fail(error)
+      if (error.code === 3) {
+        Event.emit('error', "登录失效，您已退出登录");
+        LoginMgr.logout();
+      } else {
+        const msg = (error.code < 0 ? '系统错误' : error.msg) + '(错误码 ' + error.code + ')';
+        Event.emit('error', error.msg ? msg : error);
+        console.log(error);
+        if (fail) fail(error)
+      }
     };
     $.ajax({
       url: request.url,

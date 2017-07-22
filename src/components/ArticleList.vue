@@ -182,6 +182,7 @@
           line-height: 24px;
           font-size: 18px;
           color: #333;
+          max-width: 600px;
           margin-bottom: 6px;
         }
         .tag {

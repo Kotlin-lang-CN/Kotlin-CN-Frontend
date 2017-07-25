@@ -1,16 +1,17 @@
 <template>
   <div>
     <div class="content">
-      <div class="list" v-for="value in articles" v-on:click="forward(value.meta.id)">
+      <a class="list" v-for="value in articles" v-bind:href="urlPrefix + value.meta.id">
         <section>
           <div class="footnote">
-            <i v-on:click.stop="showUser(value.author)" class="user-link">{{ value.author.username }}</i>
-            发布于 {{ value.meta.create_time | moment}}
+            <a v-on:click.stop="showUser(value.author)" class="user-link"
+               href="javascript:void(0);">{{ value.author.username }}
+            </a>发布于 {{ value.meta.create_time | moment}}
           </div>
           <div class="flex">
-            <div class="logo" v-on:click.stop="showUser(value.author)">
+            <a class="logo" v-on:click.stop="showUser(value.author)" href="javascript:void(0);">
               <app-avatar :user.sync="value.author"></app-avatar>
-            </div>
+            </a>
             <div class="wrap">
               <div class="title">
                 <span class="focus">{{ value.meta.title }}</span>
@@ -30,14 +31,15 @@
               <span class="tag focus" v-if="value.meta.tags && value.meta.tags.length >0"
                     v-for="tag in value.meta.tags.split(/;/)">{{ '#' + tag + '&nbsp' }}</span>
               <div class="footnote right">
-                最后由 <i v-on:click.stop="showUser(value.last_editor)"
-                       class="user-link">{{ value.last_editor.username}}</i>
+                最后由
+                <a v-on:click.stop="showUser(value.last_editor)" class="user-link"
+                   href="javascript:void(0);">{{ value.last_editor.username}}</a>
                 更新于 {{ value.meta.last_edit_time | moment}}
               </div>
             </div>
           </div>
         </section>
-      </div>
+      </a>
     </div>
     <button v-on:click="get(requestUrl, offset)" v-show="hasMore">加载更多</button>
   </div>
@@ -55,6 +57,7 @@
     },
     data() {
       return {
+        urlPrefix: Config.UI.post + '/',
         me: LoginMgr,
         loading: false,
         articles: [],
@@ -191,7 +194,7 @@
           color: #999;
         }
         .category {
-          font-size:13px;
+          font-size: 13px;
           display: inline-block;
           background-color: #256fe8;
           border-radius: 2px;

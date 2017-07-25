@@ -44,12 +44,10 @@
   import Net from "../assets/js/Net.js";
   import DisplayPanels from '../components/DisplayPanels.vue';
   import LoginMgr from '../assets/js/LoginMgr.js';
-  import StatsBlock from '../components/StatsBlock.vue';
 
   export default {
     components: {
       'display-panels': DisplayPanels,
-      'stats-block': StatsBlock
     },
     data() {
       return {

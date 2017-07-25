@@ -74,7 +74,7 @@
         Event.emit('name-card', user)
       },
       getMessage(index){
-        const limit = 20;
+        const limit = 10;
         Net.get({
           url: Config.URL.message.latest,
           condition: {offset: index, limit: limit}

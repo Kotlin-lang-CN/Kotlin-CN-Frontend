@@ -20,7 +20,8 @@ const Config = {
       password: CGI.account + '/user/{0}/password',
       update: CGI.account + '/user/{0}/update',
       profile: CGI.account + '/profile',
-      profile_update: CGI.account + '/profile/update'
+      profile_update: CGI.account + '/profile/update',
+      count: CGI.account + '/count'
     },
     github: {
       createState: CGI.github + '/state',
@@ -41,7 +42,8 @@ const Config = {
       category: CGI.article + '/category',//获取文章类别列表
       getLatest: CGI.article + '/list',//获取最新文章列表
       getFine: CGI.article + '/fine', //获取精品文章列表
-      getCategory: CGI.article + '/category/{0}'//获取特定类别最新文章列表
+      getCategory: CGI.article + '/category/{0}',//获取特定类别最新文章列表
+      count: CGI.article + '/count',//获取文章总数统计
     },
     reply: {
       count: CGI.reply + '/count',

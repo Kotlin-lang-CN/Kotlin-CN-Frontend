@@ -9,6 +9,14 @@
         <display-panels :content="dashboard"></display-panels>
       </div>
     </div>
+    <div class="part left">
+      <header>统计信息</header>
+      <ul class="card">
+        <li>注册会员: <b>{{user_count}}</b> 人</li>
+        <li>发表文章: <b>{{article_count}}</b> 篇</li>
+        <li>参与回复: <b>{{reply_count}}</b> 条</li>
+      </ul>
+    </div>
     <div class="part">
       <header>友情链接</header>
       <ul class="card">
@@ -36,24 +44,32 @@
   import Net from "../assets/js/Net.js";
   import DisplayPanels from '../components/DisplayPanels.vue';
   import LoginMgr from '../assets/js/LoginMgr.js';
+  import StatsBlock from '../components/StatsBlock.vue';
 
   export default {
     components: {
-      'display-panels': DisplayPanels
+      'display-panels': DisplayPanels,
+      'stats-block': StatsBlock
     },
     data() {
       return {
         dashboard: '',
         dashboardInput: '',
         me: LoginMgr,
-        editDashboard: false
+        editDashboard: false,
+        user_count: 0,
+        article_count: 0,
+        reply_count: 0,
       }
     },
     props: {
       showPostBtn: true
     },
-    created(){
+    created() {
       Net.get({url: Config.URL.misc.dashboard}, (data) => this.dashboard = this.dashboardInput = data.text);
+      Net.get({url: Config.URL.article.count}, (resp) => this.article_count = resp.total);
+      Net.get({url: Config.URL.account.count}, (resp) => this.user_count = resp.total);
+      Net.get({url: Config.URL.reply.count}, (resp) => this.reply_count = resp.data[0]);
     },
     computed: {
       showDialog() {
@@ -99,6 +115,10 @@
     .button:active {
       background-color: #1c4ecf;
     }
+    .left {
+      text-align: left;
+    }
+
     .part {
       header {
         font-size: 18px;

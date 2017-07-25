@@ -14,12 +14,13 @@
 
 <script>
   import Login from '../componentsMobile/Login.vue';
+
   export default {
     components: {
       'app-login': Login
     },
     methods: {
-      back(){
+      back() {
         history.back();
       }
     }

@@ -20,11 +20,12 @@
     <div class="part">
       <header>友情链接</header>
       <ul class="card">
+        <li><a href="https://ruby-china.org/" target="_blank"><i class="ruby-china"></i></a></li>
         <li><a href="http://cnodejs.org/" target="_blank"><i class="cnodejs"></i></a></li>
         <li><a href="https://laravel-china.org/" target="_blank"><i class="laravel"></i></a></li>
         <li><a href="http://golangtc.com/" target="_blank"><i class="golangtc"></i></a></li>
         <li><a href="http://elixir-cn.com/" target="_blank"><i class="elixir"></i></a></li>
-        <li><a href="https://testerhome.com/" target="_blank"></a><i class="tester"></i></li>
+        <li><a href="https://www.javafm.com/" target="_blank"><i class="javafm"></i></a></li>
       </ul>
     </div>
     <div class="dialog" v-if="showDialog">
@@ -116,7 +117,6 @@
     .left {
       text-align: left;
     }
-
     .part {
       header {
         font-size: 18px;
@@ -143,6 +143,9 @@
             height: 40px;
             margin: 0 auto 16px auto;
           }
+          .javafm {
+            background: url(../assets/img/javafm.png) no-repeat;
+          }
           .cnodejs {
             background: url(../assets/img/friendship1.png) no-repeat;
           }
@@ -158,8 +161,8 @@
           .ioni {
             background: url(../assets/img/friendship5.png) no-repeat;
           }
-          .tester {
-            background: url(../assets/img/friendship6.png) no-repeat;
+          .ruby-china {
+            background: url(../assets/img/ruby_china.png) no-repeat;
           }
         }
       }

@@ -66,9 +66,7 @@
     methods: {
       forward(tid) {
         let tab = URL.param("category");
-        console.log(tab);
         this.select = tid !== undefined ? tid : tab ? tab : 0;
-        console.log(this.select);
         if (this.select === 0) {
           this.articleListUrl = Config.URL.article.getFine;
         } else if (this.select === 1) {

@@ -7,9 +7,9 @@
         <div class="post">
           <div class="sub-nav">
             <a v-on:click="forward(0)" href="/"
-               v-bind:class="{'select': select === 0, 'normal':  select !== 0 }">精品</a>
+               v-bind:class="{'select': select == 0, 'normal':  select != 0 }">精品</a>
             <a v-on:click="forward(1)" href="/?category=1"
-               v-bind:class="{'select': select === 1, 'normal': select !== 1}">最新发布</a>
+               v-bind:class="{'select': select == 1, 'normal': select != 1}">最新发布</a>
             <!--suppress CommaExpressionJS -->
             <a v-for="(category, id) in categories" v-on:click="forward(id + 2)" v-bind:href="'/?category=' + (id + 2)"
                v-bind:class="{
@@ -66,14 +66,16 @@
     methods: {
       forward(tid) {
         let tab = URL.param("category");
-        this.select = tid !== undefined ? tid : tab ? tab : 0;
-        if (this.select === 0) {
+        this.select = tid !== undefined ? tid : (tab !== null ? tab : 0);
+        window.console.log(this.select + ';flag=' + (this.select === '1'));
+        if (this.select === 0 || this.select === '0') {
           this.articleListUrl = Config.URL.article.getFine;
-        } else if (this.select === 1) {
+        } else if (this.select === 1 || this.select === '1') {
           this.articleListUrl = LoginMgr.isAdmin() ? Config.URL.admin.articleList : Config.URL.article.getLatest;
         } else {
           this.articleListUrl = Config.URL.article.getCategory.format(this.select - 1);
         }
+        window.console.log(this.articleListUrl);
       },
     },
   }

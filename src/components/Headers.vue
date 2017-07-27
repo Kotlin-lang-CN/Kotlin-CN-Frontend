@@ -68,13 +68,9 @@
   import Config from '../assets/js/Config.js';
   import Avatar from "./Avatar.vue";
   import Net from '../assets/js/Net.js';
+  import URL from '../assets/js/URL';
   import Cookie from 'js-cookie';
   import vueLoading from 'vue-loading-template';
-
-  function getParam(name) {
-    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
-      .exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null;
-  }
 
   export default {
     components: {
@@ -100,8 +96,8 @@
     created: function () {
       Event.on("fullscreen", (on) => this.moduleShow = !on);
       Event.on("page-scroll", (top) => this.top = top);
-      const code = getParam('code');
-      const state = getParam('state');
+      const code = URL.param('code');
+      const state = URL.param('state');
       if (code && state && code !== null && state !== null) {
         this.isLoading = true;
         this.handleGithubAuth(code, state)

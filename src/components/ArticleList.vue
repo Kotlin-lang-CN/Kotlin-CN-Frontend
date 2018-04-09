@@ -17,8 +17,7 @@
                 <span class="focus">{{ value.meta.title }}</span>
                 <div class="extra">
                   <!--suppress HtmlFormInputWithoutLabel -->
-                  <select v-model="value.meta.state" v-on:change="updateState(value.meta)" v-on:click.stop=""
-                          v-if="me.isAdminRole">
+                  <select v-model="value.meta.state" v-on:change="updateState(value.meta)" v-on:click.stop="" v-if="me.isAdminRole">
                     <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option>
                   </select>
                   <small v-if="showDelete(value)" class="delete" v-on:click.stop="deleteArticle(value)">删除</small>
